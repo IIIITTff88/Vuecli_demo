@@ -15,8 +15,8 @@ import './mock'
 
 // console.log(router)
 router.beforeEach((to, from, next) => {
-  console.log(to)
-  console.log(from)
+  // console.log(to)
+  // console.log(from)
   next()
 })
 

@@ -39,8 +39,8 @@ export default {
   height: 100%;
   position: relative;
   .content {
-    width: 100%;
-    height: 100%;
+    // width: 100%;
+    // height: 100%;
     overflow: hidden;
     padding-top: 46px;
     padding-bottom: 50px;

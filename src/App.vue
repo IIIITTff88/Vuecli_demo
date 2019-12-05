@@ -7,5 +7,9 @@
 </template>
 
 <style lang="less">
-
+  #app {
+    width: calc(100vw);
+    height: calc(100vh);
+    position: relative;
+  }
 </style>
