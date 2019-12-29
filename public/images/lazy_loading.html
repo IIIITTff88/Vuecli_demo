@@ -1,0 +1,86 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      overflow: hidden;
+      list-style: none;
+    }
+
+    li {
+      overflow: hidden;
+      width: 50%;
+      height: 400px;
+      margin-bottom: 20px;
+    }
+
+    img {
+      display: inline-block;
+      width: 100%;
+      height: 400px;
+      margin: 0 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <ul class="imgList">
+      <img src="" alt="" data-src='../images/gallery/1.png'>
+      <img src="" alt="" data-src='../images/gallery/2.png'>
+      <img src="" alt="" data-src='../images/gallery/3.png'>
+      <img src="" alt="" data-src='../images/gallery/4.png'>
+      <img src="" alt="" data-src='../images/gallery/5.png'>
+      <img src="" alt="" data-src='../images/gallery/6.png'>
+      <img src="" alt="" data-src='../images/gallery/7.png'>
+      <img src="" alt="" data-src='../images/gallery/8.png'>
+      <img src="" alt="" data-src='../images/gallery/9.png'>
+      <img src="" alt="" data-src='../images/gallery/10.png'>
+      <img src="" alt="" data-src='../images/gallery/11.png'>
+      <img src="" alt="" data-src='../images/gallery/13.png'>
+      <img src="" alt="" data-src='../images/gallery/14.png'>
+      <img src="" alt="" data-src='../images/gallery/15.png'>
+      <img src="" alt="" data-src='../images/gallery/16.png'>
+      <img src="" alt="" data-src='../images/gallery/17.png'>
+    </ul>
+  </div>
+  <script>
+    window.onload = function () {
+      var imgs = document.querySelectorAll('img')
+
+      function offsetHeight(e) {
+        return e.offsetTop
+      }
+
+      window.onscroll = function () {
+        lazyLoad(imgs)
+      }
+
+      function lazyLoad(imgs) {
+        let clientHeight = window.innerHeight  // 可视区的高度
+        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;//获取滚动的值
+        for (let i = 0; i < imgs.length; i++) {
+          if ((clientHeight + scrollTop) > offsetHeight(imgs[i])) {
+            setTimeout(function () {
+              let img = new Image()
+              img.src = imgs[i].getAttribute('data-src')
+              img.onload = function () {
+                imgs[i].setAttribute('src', img.src)
+              }
+            }, 1000)
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>

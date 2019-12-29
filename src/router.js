@@ -39,6 +39,10 @@ export default new Router({
         {
           path: '/tree',
           component: () => import('./views/tree/index.vue')
+        },
+        {
+          path: '/news/detail',
+          component: () => import('./views/news/index.vue')
         }
       ]
     }

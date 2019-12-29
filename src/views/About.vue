@@ -47,7 +47,7 @@
           <span>王小虎</span>
         </el-header>
 
-        <el-main class="test-5" style="background:#f3f3f3">
+        <el-main class="test-5" style="background:#f3f3f3;">
           <router-view></router-view>
         </el-main>
         <el-footer style="text-align: center; font-size: 14px; height:50px">
@@ -93,7 +93,7 @@ export default {
 #main {
   .my-aside {
     height: calc(100vh) -100px;
-    width: 220px;
+    min-width: 220px;
     margin: 50px 0;
     overflow-x: hidden;
     background: #fff;
