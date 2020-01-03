@@ -70,17 +70,89 @@
         </el-col>
       </el-row>
     </el-form>
+    <el-divider>slot表格</el-divider>
+    <div class="table_wraper">
+      <el-table ref="myTable" :data='tableList' stripe style="width: 100%" border
+        :header-cell-style="{background:'#E8F4FF',color:'#313233'}">
+        <el-table-column type="index" width="50" label="序号" align="center" fixed></el-table-column>
+        <el-table-column prop="name" label="姓名" width="80" align="center" fixed></el-table-column>
+        <el-table-column prop="age" label="年龄" width="80" align="center"></el-table-column>
+        <el-table-column label="城市" width="80" align="center" show-overflow-tooltip>
+          <template slot-scope="scope">
+            <a href="www.baidu.com">{{scope.row.adress}}</a>
+          </template>
+        </el-table-column>
+        <el-table-column prop="sex" label="性别" width="80" align="center"></el-table-column>
+        <el-table-column prop="date" label="日期" width="180" align="center"></el-table-column>
+        <el-table-column prop="detail" label="介绍" align="center" show-overflow-tooltip></el-table-column>
+        <el-table-column label="状态" align="center" width="200" :show-overflow-tooltip="true">
+          <template slot-scope="scope" v-if="showSelect">
+            <el-select placeholder="请选择" v-model="type">
+              <el-option label="模块1" value="1"></el-option>
+              <el-option label="模块2" value="2"></el-option>
+              <el-option label="模块3" value="3"></el-option>
+            </el-select>
+          </template>
+        </el-table-column>
+        <el-table-column label="备注" width="200" align="center">
+          <template slot-scope="scope">
+            <el-input placeholder="请输入" v-model="message" v-if="showInput"></el-input>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" align="center" width="250">
+          <template slot-scope="scope">
+            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)" type="info">查看</el-button>
+            <el-button size="mini" @click="submit" type="success">提交</el-button>
+            <el-button size="mini" @click="del" type="warning">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+    <el-divider>复杂表头的表格</el-divider>
+    <div class="table-wrapper-second">
+      <el-table ref="table_fz" :data="table_fz" border :header-cell-style="{background:'#E8F4FF',color:'#313233'}">
+        <el-table-column label="序号" type="index" width="80" align="center"></el-table-column>
+        <el-table-column label="全国地区" align="center">
+          <el-table-column label="省" align="center" prop="province"></el-table-column>
+          <el-table-column label="市" align="center" prop="city"></el-table-column>
+          <el-table-column label="县" align="center" prop="county"></el-table-column>
+          <el-table-column label="区" align="center" prop="detail_adress"></el-table-column>
+        </el-table-column>
+        <el-table-column label="个人信息" align="center">
+          <el-table-column label="姓名" align="center" prop="name"></el-table-column>
+          <el-table-column label="年龄" align="center" prop="num"></el-table-column>
+          <el-table-column label="住址" align="center" prop="image">
+            <template slot-scope="scope">
+              <a href="#" @click="lookDetail($event,scope)">{{scope.row.image}}</a>
+            </template>
+          </el-table-column>
+        </el-table-column>
+      </el-table>
+    </div>
+    <el-dialog :visible.sync="dialogVisible" width="30%">
+      <el-image style="width: 100px; height: 100px" :src="imgUrl"></el-image>
+    </el-dialog>
   </div>
 </template>
 <script>
+import Http from '../../http/index'
 export default {
   data () {
     return {
+      tableList: [],
+      fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+      imgUrl: '',
+      dialogVisible: false,
+      table_fz: [{}],
+      showSelect: false,
+      message: '',
+      showInput: false,
       formInline: {
         name: '',
         like: '',
         age: ''
       },
+      type: '',
       options: [
         { label: '全部', value: '' },
         { label: '篮球', value: '1' },
@@ -151,8 +223,57 @@ export default {
   },
   mounted () {
     this.newarr = []
+    this._getTableList()
+    this._getTestLsit()
   },
   methods: {
+    fit () {},
+    lookDetail (e, value) {
+      e.preventDefault()
+      this.dialogVisible = true
+      this.imgUrl = value.row.image
+      console.log(value)
+    },
+    async _getTableList () {
+      let result = await Http.ajax({
+        url: '/tabble/List',
+        type: 'get'
+      })
+      this.tableList = result.newList
+    },
+    async _getTestLsit () {
+      let result = await Http.ajax({
+        type: 'get',
+        url: '/mock'
+      })
+      this.table_fz = result.testList
+    },
+    submit () {
+      this.$confirm('你确定要删除本条数据吗？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'success'
+      })
+        .then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功'
+          })
+        })
+        .catch(_ => {
+          this.$message({
+            type: 'warning',
+            message: '取消提交'
+          })
+        })
+    },
+    del () {
+      this.showSelect = true
+      this.showInput = true
+    },
+    handleEdit (index, row) {
+      console.log(index, row)
+    },
     singleElection (row) {
       this.templateSelection = this.tableData.indexOf(row) // 下标
       this.templateRadio = row.id // 数据的id
@@ -177,8 +298,7 @@ export default {
       var result = this.StepsListRowClick()
       console.log(result)
     },
-    query () {
-    },
+    query () {},
     resetForm (formName) {
       this.$refs.formInline.resetFields()
       this.$refs[formName].resetFields()
@@ -188,11 +308,16 @@ export default {
 </script>
 <style lang="less" scoped>
 .main {
-  /deep/ .el-input__inner{
+  /deep/ .el-input__inner {
     width: 300px;
   }
   .btn-group {
     text-align: right;
+  }
+  .table_wraper {
+    /deep/ .el-input__inner {
+      width: 150px;
+    }
   }
 }
 </style>

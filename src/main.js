@@ -13,18 +13,12 @@ import zh_CN from 'vee-validate/dist/locale/zh_CN'
 
 import './style/index.less'
 
-import axios from 'axios'
-// import Mack from './mock/index'
 // eslint-disable-next-line no-unused-vars
 import Mock from './mock/index.js'
 
 import moment from 'moment'
 
-// Vue.use(Mock)
 // 改变主题的颜色
-// import mock from ''
-
-Vue.prototype.$http = axios
 
 Vue.prototype.$moment = moment
 
