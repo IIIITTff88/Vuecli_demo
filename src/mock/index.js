@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 
 Mock.setup({
-  timeout: 2000 // 延迟请求的时间
+  timeout: 500 // 延迟请求的时间
 })
 
 const Random = Mock.Random // Mock.Random 是一个工具类，用于生成各种随机数据
@@ -61,8 +61,53 @@ const tableList = Mock.mock('/tabble/List', {
   }]
 })
 
+const tabList1 = Mock.mock('/tab1/List', {
+  // "/mock"是通过ajax获取数据时填写的地址，可以随意写。但要和ajax请求时填写的地址一致。
+  'tabList1|3': [{ // 生成四个如下格式的数据
+    'id|+1': 1, // 数字从1开始，后续依次加1
+    'name': '@cname', // 名字为随机中文名
+    'age|18-40': 20, // 年龄是18-28之间的随机数
+    'adress': Random.county(true), // 性别是数组里的随机一项
+    'date': Random.datetime(), // job是数组里的随机一项
+    'city': Random.county(true),
+    'sex|1': ['男', '女'], // 性别是数组里的随机一项
+    'detail': Random.cparagraph(1)
+  }]
+})
+
+const tabList2 = Mock.mock('/tab2/List', {
+  // "/mock"是通过ajax获取数据时填写的地址，可以随意写。但要和ajax请求时填写的地址一致。
+  'tabList2|5': [{ // 生成四个如下格式的数据
+    'id|+1': 1, // 数字从1开始，后续依次加1
+    'name': '@cname', // 名字为随机中文名
+    'age|18-40': 20, // 年龄是18-28之间的随机数
+    'adress': Random.county(true), // 性别是数组里的随机一项
+    'date': Random.datetime(), // job是数组里的随机一项
+    'city': Random.county(true),
+    'sex|1': ['男', '女'], // 性别是数组里的随机一项
+    'detail': Random.cparagraph(2)
+  }]
+})
+
+const tabList3 = Mock.mock('/tab3/List', {
+  // "/mock"是通过ajax获取数据时填写的地址，可以随意写。但要和ajax请求时填写的地址一致。
+  'tabList3|10': [{ // 生成四个如下格式的数据
+    'id|+1': 1, // 数字从1开始，后续依次加1
+    'name': '@cname', // 名字为随机中文名
+    'age|18-40': 20, // 年龄是18-28之间的随机数
+    'adress': Random.county(true), // 性别是数组里的随机一项
+    'date': Random.datetime(), // job是数组里的随机一项
+    'city': Random.county(true),
+    'sex|1': ['男', '女'], // 性别是数组里的随机一项
+    'detail': Random.cparagraph(1)
+  }]
+})
+
 export default {
   data,
   newsList,
-  tableList
+  tableList,
+  tabList1,
+  tabList2,
+  tabList3
 }

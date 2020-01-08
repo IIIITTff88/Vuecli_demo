@@ -43,6 +43,14 @@ export default new Router({
         {
           path: '/news/detail',
           component: () => import('./views/news/index.vue')
+        },
+        {
+          path: '/timeLine',
+          component: () => import('./views/timeLine/index.vue')
+        },
+        {
+          path: '/echarts',
+          component: () => import('./views/echarts/index.vue')
         }
       ]
     }

@@ -16,7 +16,12 @@ import './style/index.less'
 // eslint-disable-next-line no-unused-vars
 import Mock from './mock/index.js'
 
+// 使用echats
+// import echarts from 'echarts'
+
 import moment from 'moment'
+
+// Vue.prototype.$echats = echarts
 
 // 改变主题的颜色
 
