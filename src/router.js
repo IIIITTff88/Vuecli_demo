@@ -51,9 +51,24 @@ export default new Router({
         {
           path: '/echarts',
           component: () => import('./views/echarts/index.vue')
+        },
+        {
+          path: '/testCom',
+          component: () => import('./views/testCom/index')
+        },
+        {
+          path: '/test/test-01',
+          component: () => import('./views/testCom/test/test-01')
+        },
+        {
+          path: '/test/test-02',
+          component: () => import('./views/testCom/test/test-03')
+        },
+        {
+          path: '/test/test-03',
+          component: () => import('./views/testCom/test/test-02')
         }
       ]
     }
-
   ]
 })

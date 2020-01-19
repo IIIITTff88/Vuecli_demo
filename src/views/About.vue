@@ -4,7 +4,7 @@
       <div class="my-aside test-5">
        <el-row class="col_top">
           <div class="my-top">
-          element-ui
+          顶部
         </div>
        </el-row>
         <el-aside width="" class="test-5">
@@ -17,7 +17,7 @@
                 </template>
                 <el-menu-item v-for="(menuChildren_v,menuChildren_k) in menu_v.children" :key="menuChildren_k"
                   :index="menuChildren_v.path">
-                  <i class="is-children fa fa-circle-o"></i>
+                  <i :class="menuChildren_v.icon"></i>
                   <span slot="title">{{ menuChildren_v.name }}</span>
                 </el-menu-item>
               </el-submenu>
@@ -30,13 +30,19 @@
         </el-aside>
         <el-row class="col_bottom">
           <div class="my-bottom">
-          bottom
+          底部
         </div>
         </el-row>
       </div>
 
       <el-container>
         <el-header style="text-align: right; font-size: 12px; height:50px">
+          <el-col :span="4">
+            <span @click="changelang('en')" style="cursor: pointer">中文</span>
+            <span @click="changelang('zh')" style="margin-left: 20px;cursor: pointer;">英文</span>
+            <span>{{msg | test}}</span>
+<!--            <span>{{this}}</span>-->
+          </el-col>
           <el-dropdown>
             <i class="el-icon-setting" style="margin-right: 15px"></i>
             <el-dropdown-menu slot="dropdown">
@@ -64,11 +70,18 @@ export default {
   components: {
     // ThemePicker
   },
+  filters: {
+    test (val) {
+      console.log(this)
+      return val.split('').reverse().join()
+    }
+  },
   data () {
     return {
       menu: menu,
       color1: 'red',
-      theme: ''
+      theme: '',
+      msg: 'hello world'
     }
   },
 
@@ -83,6 +96,14 @@ export default {
     // console.log(111222)
   },
   methods: {
+    changelang (type) {
+      console.log(this.$i18n)
+      console.log(type)
+      this.$i18n.locale = type
+    },
+    fn (type) {
+      console.log(type)
+    }
     // activeChange () {
     //   console.log(this.color1)
     // }

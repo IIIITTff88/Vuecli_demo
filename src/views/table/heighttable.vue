@@ -28,8 +28,9 @@
       </el-table-column>
       <el-table-column prop="num" align="center" label="数量" show-overflow-tooltip sortable :formatter="filters">
       </el-table-column>
-      <el-table-column prop="time" align="center" label="时间" show-overflow-tooltip sortable :sort-method="methods" >
+      <el-table-column prop="time" align="center" label="时间" show-overflow-tooltip sortable :sort-method="methods">
       </el-table-column>
+      <span></span>
     </el-table>
   </div>
 
@@ -123,6 +124,11 @@ export default {
         })
       } else {
         this.$refs.multipleTable.clearSelection()
+        this.$nextTick(() => {
+          setInterval(() => {
+            console.log(123)
+          }, 1000)
+        })
       }
     },
     handleSelectionChange (val) {
@@ -139,7 +145,7 @@ export default {
     },
     filters (row) {
       if (row) {
-        return (row.num * 100 / 3).toFixed(2)
+        return ((row.num * 100) / 3).toFixed(2)
       }
     }
   }

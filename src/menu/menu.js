@@ -20,6 +20,14 @@ let menu = [
   { name: '文件上传', path: '/upload', icon: 'el-icon-video-camera' },
   { name: '测试路由', path: '/myloog', icon: 'el-icon-video-camera' },
   { name: '时间线', path: '/timeLine', icon: 'el-icon-s-promotion' },
-  { name: 'echarts', path: '/echarts', icon: 'el-icon-paperclip' }
+  { name: 'echarts', path: '/echarts', icon: 'el-icon-paperclip' },
+  { name: '测试的组件',
+    path: '/testCom',
+    icon: 'el-icon-picture',
+    children: [
+      { name: '测试111', path: '/test/test-01', icon: 'el-icon-s-comment' },
+      { name: '测试222', path: '/test/test-02', icon: 'el-icon-document-copy' },
+      { name: '测试333', path: '/test/test-03', icon: 'el-icon-coin' }
+    ] }
 ]
 export default menu
