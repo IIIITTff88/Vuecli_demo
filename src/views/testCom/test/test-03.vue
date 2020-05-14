@@ -1,22 +1,33 @@
 <template>
   <div class="main p20">
     <creadcrumb :data="data"></creadcrumb>
-    <el-row class="mb15">
-      <el-button @click="add">测试的按钮</el-button>
-    </el-row>
-    <el-form :model="form" ref="mode" class="form">
-      <el-form-item label="账号：" :label-width="labelWidth">
-        <el-input v-model="form.id" placeholder="请输入账号"></el-input>
-      </el-form-item>
-      <el-form-item label="密码" :label-width="labelWidth">
-        <el-input v-model="form.password">
-        </el-input>
+    <el-divider>华丽的分割线</el-divider>
+    <!-- <el-row> -->
+    <el-form :model="form" ref="form" class="form">
+      <el-row>
+        <el-col :span="12">
+          <el-form-item label="身份证" prop="id" label-width="120px">
+            <el-input v-model="form.id" placeholder="请输入身份证号"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-col :span="12">
+        <el-form-item label="地址" prop="address" label-width="120px">
+          <el-input v-model="form.address" placeholder="请输入地址"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-form-item style="">
+        <el-button type="primary">添加</el-button>
+        <el-button type="primary">重置</el-button>
       </el-form-item>
     </el-form>
-    <el-row class="">
-      <div class="test"></div>
-      <button style="">button</button>
+    <el-divider>分割线-----------------------------分割线</el-divider>
+    <el-row>
+      <el-col>
+        <el-button type="primary" @click="goRouter">路由跳转</el-button>
+      </el-col>
     </el-row>
+    <!-- </el-row> -->
   </div>
 </template>
 
@@ -33,12 +44,13 @@ export default {
       data: ['1', '2'],
       form: {
         id: '',
-        password: ''
+        password: '',
+        address: ''
       }
     }
   },
   created () {
-    console.log(this.form)
+    // console.log(this.form)
   },
   methods: {
     add (e) {
@@ -46,13 +58,23 @@ export default {
       this.$nextTick(() => {
         Object.assign(this.form)
       })
+    },
+    goRouter () {
+      // console.log(this.$router)
+      this.$router.push({
+        path: '/test-Com',
+        query: {
+          id: 1,
+          name: 'rose'
+        }
+      })
     }
   }
 }
 </script>
 
 <style scoped lang="less">
-  .main {
-    background: #fff;
-  }
+.main {
+  background: #fff;
+}
 </style>

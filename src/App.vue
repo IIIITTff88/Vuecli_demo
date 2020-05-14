@@ -1,9 +1,16 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
-
+<script>
+export default {
+  created () {
+    console.log(this.$store.state.num)
+    this.$store.dispatch('changeNum', 20)
+  }
+}
+</script>
 <style lang="less">
 #app {
   width: 100%;

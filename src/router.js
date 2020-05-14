@@ -67,6 +67,14 @@ export default new Router({
         {
           path: '/test/test-03',
           component: () => import('./views/testCom/test/test-02')
+        },
+        {
+          path: '/test-Com',
+          component: () => import('./views/testCom/test/test-Com')
+        },
+        {
+          path: '*',
+          component: () => import('./views/404')
         }
       ]
     }

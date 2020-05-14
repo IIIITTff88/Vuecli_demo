@@ -67,7 +67,7 @@
         </el-form-item>
       </el-row>
       <el-row>
-        <img src="../../../../public/images/gallery/10.png" alt="">
+        <!-- <img src="../../../../public/images/gallery/10.png" alt=""> -->
       </el-row>
       <el-form-item>
         <el-row style="display: flex; justify-content: center;">
@@ -76,13 +76,21 @@
         </el-row>
       </el-form-item>
     </el-form>
+    <el-divider>测试的案列</el-divider>
+    <el-row>
+      <son @sendMsg="getMsg"></son>
+    </el-row>
   </div>
 </template>
 
 <script>
+import son from '../../../common/son'
 const citys = ['北京', '上海', '广州', '深圳']
 export default {
   name: 'text-03.vue',
+  components: {
+    son
+  },
   data () {
     const validatePass = (rule, value, callback) => {
       let reg = /[m]/g
@@ -151,6 +159,9 @@ export default {
     reset (formName) {
       this.$refs[formName].resetFields()
       // 这是测试的注释
+    },
+    getMsg (v) {
+      console.log(v)
     }
   }
 }

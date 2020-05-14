@@ -13,12 +13,17 @@ export default new Vuex.Store({
     // settings
   },
   state: {
-
+    num: 0
   },
   mutations: {
-
+    CHANGE_NUM (state, num) {
+      state.num = num
+    }
   },
   actions: {
+    changeNum ({ commit }, info) {
+      commit('CHANGE_NUM', info)
+    }
   }
 
 })
